@@ -13,4 +13,5 @@ interface RecipeRepository: MongoRepository<Recipe, String>{
 
     @Query("{'name': {\$regex : ?0, \$options: 'i'}}")
     fun findByNameRegex(name:String?):Iterable<Recipe>
+
 }
