@@ -3,14 +3,13 @@ package com.therecipe.recipes.controller
 import com.therecipe.recipes.dto.CreateRecipeDto
 import com.therecipe.recipes.model.Recipe
 import com.therecipe.recipes.service.RecipeService
-import jakarta.websocket.server.PathParam
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.util.StringUtils
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -56,6 +55,18 @@ class RecipeController (@Value("\${therecipe.recipes.buildNumber}") val buildNum
     fun create(@RequestBody request: CreateRecipeDto): CreateRecipeDto {
         logger.info("Creating the recipe: {}", request)
         return recipeService.createRecipe( Recipe(id = null,
+            name = request.name,
+            description = request.description,
+            imageUrl = request.imageUrl,
+            ingredients =  Optional.ofNullable(request.ingredients).orElse(emptyList()
+            )))
+    }
+
+    @PutMapping
+    fun update(@RequestBody request: CreateRecipeDto): CreateRecipeDto {
+        logger.info("Creating the recipe: {}", request)
+        return recipeService.createRecipe( Recipe(
+            id = request.code,
             name = request.name,
             description = request.description,
             imageUrl = request.imageUrl,

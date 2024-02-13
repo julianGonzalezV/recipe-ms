@@ -25,4 +25,9 @@ class RecipeService(private val recipeRepo: RecipeRepository) {
 
     fun deleteCode(code:String) =
         recipeRepo.deleteById(code)
+
+    fun updateRecipe(recipe: Recipe):CreateRecipeDto {
+        val createdRecipe = recipeRepo.save(recipe)
+        return CreateRecipeDto(createdRecipe)
+    }
 }
