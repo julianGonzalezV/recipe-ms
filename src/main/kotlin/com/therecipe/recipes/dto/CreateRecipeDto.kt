@@ -8,7 +8,7 @@ data class CreateRecipeDto(val code: String?,
                            val ingredients:List<String>,
                            val imageUrl:String) {
 
-    constructor(recipe: Recipe): this(recipe.id, recipe.name, recipe.description,recipe.ingredients,recipe.imageUrl)
+    //constructor(recipe: Recipe): this(recipe.id, recipe.name, recipe.description,recipe.ingredients,recipe.imageUrl)
 
     init {
         require(name.length >1) { "Please provide a name to the recipe" }
